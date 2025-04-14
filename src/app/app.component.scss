@@ -1,0 +1,45 @@
+.sidebar-content {
+    height: 100vh;
+    position: fixed;
+    
+}
+.main-content {
+    padding-left: 44px;
+    height: 100%;
+}
+.main-content-row {
+    display: flex;
+    height: 100%;
+}
+
+.tools-buttons-container {
+    background-color: #424242;
+    height: 50px;
+    padding: 5px;
+}
+.add-sticker-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+
+    &:hover {
+        background-color: #333333;
+    }
+
+    mat-icon {
+        color: #3595de;
+    }
+    span {
+        font-size: 10px;
+        color: white;
+    }
+}
+.content-left {
+    background-color: #292929;
+    height: 100%;
+}
