@@ -24,7 +24,9 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class CreateStickerDialogComponent {
   form: FormGroup;
-  stickerCreated = output()
+  stickerCreated = output();
+
+  files: File[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +40,6 @@ export class CreateStickerDialogComponent {
       isReaction: [true],
     });
   }
-
   submitForm() {
     if (this.form.valid) {
       const headers = {
@@ -58,18 +59,28 @@ export class CreateStickerDialogComponent {
               verticalPosition: 'top',
               panelClass: ['snackbar-success'],
             });
-            this.stickerCreated.emit()
+            this.stickerCreated.emit();
             this.dialogRef.close();
-
           },
           error: (err) => {
             this.snackBar.open('Failed to create sticker ❌', 'Close', {
               duration: 4000,
-              panelClass: ['snackbar-error']
+              panelClass: ['snackbar-error'],
             });
             console.error(err);
           },
         });
     }
+  }
+
+  onFilesSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input?.files) {
+      this.files.push(...Array.from(input.files));
+    }
+  }
+
+  removeFile(index: number) {
+    this.files.splice(index, 1);
   }
 }

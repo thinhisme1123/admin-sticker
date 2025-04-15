@@ -67,3 +67,53 @@ button[mat-button] {
     overflow: hidden !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
+
+.sticker-upload-input mat-label{
+    color: white;
+}
+.sticker-upload-input {
+    input { 
+        display: none;
+    }
+}
+.sticker-upload-add-icon {
+    width: 100%;
+    background-color: #00d26a;
+    display: flex;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+    &:hover {
+        opacity: .8;
+    }
+}
+.sticker-upload-add-icon i{
+    margin: auto;
+    color: white;
+}
+.file-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.file-preview mat-label{
+    color: white;
+}
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    font-size: 13px;
+
+    button {
+        background: none;
+        border: none;
+        color: red;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}

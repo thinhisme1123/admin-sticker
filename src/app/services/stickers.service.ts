@@ -15,6 +15,8 @@ export class StickersService {
 
   constructor(private http: HttpClient) {}
 
+  
+
   // [GET] : fetch all sticker
   fetchCategories(): Promise<any[]> {
     const headers = new HttpHeaders({
@@ -45,7 +47,7 @@ export class StickersService {
     
     return this.http.delete(`${environment.apiUrl}/BuiltInMessageCategory/?Id=${id}`, { headers });
   }
-
+  // [GET] : get sticker detail
   getStickerDetail(id: string) {
     const headers = {
       Authorization: this.token,
@@ -54,5 +56,14 @@ export class StickersService {
       headers,
     });
   }
-  
+  // [PUT] : update sticker
+  updateSticker(data: any) {
+    const headers = {
+      Authorization: this.token,
+    };
+    return this.http.put<any>(`${environment.apiUrl}/BuiltInMessageCategory`,data, {
+      headers,
+    });
+  }
+
 }

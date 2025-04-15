@@ -1,0 +1,35 @@
+.confirm-dialog-container {
+    background-color: #292929;
+    
+}
+.confirm-dialog-header {
+    border-bottom: 1px solid #424242;
+    margin: 0 10px;
+}
+.dialog-title,
+.dialog-content {
+    color: white;
+}
+.dialog-actions {
+display: flex;
+justify-content: center;
+}
+.btn-cancel,
+.btn-confirm {
+    padding: 5px 40px;
+    border-radius: 4px;
+    color: white!important;
+
+}
+
+.btn-cancel { 
+    border: 1px solid white;
+    background-color: transparent!important;
+
+    &:hover {
+        background-color: #7b8190;
+    }
+}
+.btn-confirm  {
+    background-color: red;
+}

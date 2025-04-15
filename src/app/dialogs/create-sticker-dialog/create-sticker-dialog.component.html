@@ -12,7 +12,27 @@
         <mat-label>Description</mat-label>
         <input class="create-sticker-fields" matInput formControlName="description">
       </mat-form-field>
-    
+
+      <div class="full-width sticker-upload-input">
+        <mat-label >Stickers Upload</mat-label>
+        <label for="fileStickers" class="sticker-upload-add-icon">
+          <i class="material-icons">add_circle</i>
+        </label>
+        <input id="fileStickers" (change)="onFilesSelected($event)" type="file" accept=".png, .jpg, .jpeg, .gif" class="create-sticker-fields" formControlName="files" multiple>
+
+      </div>
+      @if (files.length > 0) {
+        <div class="file-preview">
+          <mat-label >Files Selected</mat-label>
+          @for (file of files; track $index) {
+            <div class="file-item" >
+              <span>{{ file.name }}</span>
+              <button (click)="removeFile($index)">❌</button>
+            </div>
+          }
+        </div>
+      }
+      
       <div class="actions">
           <button id="cancelCreateStickerBtn" mat-button type="button" (click)="dialogRef.close()">Cancel</button>
           <button id="createSitckerSubmitBtn" mat-button type="submit" [disabled]="form.invalid">Submit</button>

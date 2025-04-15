@@ -1,17 +1,26 @@
 .table-container {
     background-color: #424242;
-    max-width: 900px;
+    max-height: 82vh;
     margin: 15px;
     border-radius: 8px;
-    overflow-x: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 3px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     background-color: #424242;
+
 }
 
 th {
@@ -20,6 +29,9 @@ th {
     padding: 12px;
     text-align: left;
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 td {
@@ -37,6 +49,7 @@ tr:nth-child(even) {
     color: #777;
     font-size: 16px;
 }
+
 .sticker-table-icon-btn {
     border: none;
     background-color: transparent;
@@ -46,10 +59,22 @@ tr:nth-child(even) {
         color: #3595de;
     }
 }
+
 .sticker-name {
     cursor: pointer;
 
     &:hover {
         opacity: .7;
     }
+}
+
+.sticker-table-icon-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+.sticker-table-icon-btn {
+    padding: 4px;
 }

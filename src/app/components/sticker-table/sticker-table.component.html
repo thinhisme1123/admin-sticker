@@ -8,7 +8,8 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td class="sticker-name" (click)="onStickerClick(element.id)" mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td class="sticker-name" (click)="onStickerClick(element.id)" mat-cell *matCellDef="let element">
+        {{ element.name }}</td>
     </ng-container>
 
     <!-- Description Column -->
@@ -26,16 +27,19 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let element">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="sticker-table-icon-container">
           <button class="sticker-table-icon-btn" mat-icon-button color="primary" (click)="editSticker(element)">
             <mat-icon>edit</mat-icon>
           </button>
           <button class="sticker-table-icon-btn" mat-icon-button color="warn" (click)="deleteSticker(element)">
             <mat-icon>delete</mat-icon>
           </button>
-        </td>
-      </ng-container>
+        </div>
+      </td>
+    </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
