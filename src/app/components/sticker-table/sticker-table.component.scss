@@ -1,10 +1,11 @@
 .table-container {
     background-color: #424242;
     max-width: 900px;
-    margin: 24px auto;
+    margin: 15px;
     border-radius: 8px;
     overflow-x: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
 }
 
 table {
@@ -43,5 +44,12 @@ tr:nth-child(even) {
 
     &:hover {
         color: #3595de;
+    }
+}
+.sticker-name {
+    cursor: pointer;
+
+    &:hover {
+        opacity: .7;
     }
 }

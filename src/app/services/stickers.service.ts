@@ -15,6 +15,7 @@ export class StickersService {
 
   constructor(private http: HttpClient) {}
 
+  // [GET] : fetch all sticker
   fetchCategories(): Promise<any[]> {
     const headers = new HttpHeaders({
       Authorization: this.token
@@ -34,4 +35,24 @@ export class StickersService {
         });
     });
   }
+
+  // [DELETE] : delete sticker by id
+  deleteSticker(id: number) {
+    const headers = {
+      Authorization: this.token,
+    };
+    console.log(id);
+    
+    return this.http.delete(`${environment.apiUrl}/BuiltInMessageCategory/?Id=${id}`, { headers });
+  }
+
+  getStickerDetail(id: string) {
+    const headers = {
+      Authorization: this.token,
+    };
+    return this.http.get<any>(`${environment.apiUrl}/BuiltInMessageCategory/get-builtin-message-category-by-id?Id=${id}`, {
+      headers,
+    });
+  }
+  
 }

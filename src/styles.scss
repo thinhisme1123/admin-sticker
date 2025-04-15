@@ -24,7 +24,7 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Chakra Petch", "Helvetica Neue", sans-serif;
 }
 // snackbar-notice
 .snackbar-success {
@@ -35,4 +35,14 @@ body {
 .snackbar-error {
   background-color: #f44336;
   color: white;
+}
+
+.scrollable-sticker-list::-webkit-scrollbar {
+  width: 6px;
+  
+}
+
+.scrollable-sticker-list::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 3px;
 }

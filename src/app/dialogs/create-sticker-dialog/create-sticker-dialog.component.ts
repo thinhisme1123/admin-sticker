@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
@@ -24,6 +24,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class CreateStickerDialogComponent {
   form: FormGroup;
+  stickerCreated = output()
 
   constructor(
     private fb: FormBuilder,
@@ -57,7 +58,9 @@ export class CreateStickerDialogComponent {
               verticalPosition: 'top',
               panelClass: ['snackbar-success'],
             });
+            this.stickerCreated.emit()
             this.dialogRef.close();
+
           },
           error: (err) => {
             this.snackBar.open('Failed to create sticker ❌', 'Close', {

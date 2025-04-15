@@ -1,1 +1,29 @@
-<p>sticker-detail works!</p>
+@if (stickerDetail()) {
+<div class="sticker-detail-container">
+  <div class="sticker-list-table">
+    <div class="sticker-detail-name">
+      <h5>{{stickerDetail().name}}</h5>
+    </div>
+    <div class="scrollable-sticker-list">
+      <div class="container-fluid mt-3">
+        <div class="row g-3">
+          @for (sticker of secondStickersList; track sticker.id) {
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="sticker-list-item">
+              <img [src]="sticker.imageUrl" alt="{{ sticker.name }}" class="img-fluid" />
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}
+@else {
+<div class="no-sticker-container">
+  <mat-icon class="no-sticker-icon">insert_emoticon</mat-icon>
+  <h2>No Sticker Selected</h2>
+  <p>Please select a sticker from the list to view its details.</p>
+</div>
+}

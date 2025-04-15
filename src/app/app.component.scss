@@ -1,11 +1,11 @@
 .sidebar-content {
     height: 100vh;
     position: fixed;
-    
 }
 .main-content {
     padding-left: 44px;
-    height: 100%;
+    height: calc(100vh - 90px);
+
 }
 .main-content-row {
     display: flex;
@@ -42,4 +42,5 @@
 .content-left {
     background-color: #292929;
     height: 100%;
+    border-right: 2px solid #424242;
 }

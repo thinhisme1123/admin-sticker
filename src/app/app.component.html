@@ -15,12 +15,16 @@
   <!--main content -->
   <div class="main-content-row">
     <div class="content-left col-lg-5">
-      <app-sticker-table>
+      <app-sticker-table
+        (stickerSelected)="onStickerSelected($event)"
+      >
 
       </app-sticker-table>
     </div>
     <div class="content-right col-lg-7">
-      <app-sticker-detail>
+      <app-sticker-detail
+        [stickerId]="selectedStickerid()"
+      >
 
       </app-sticker-detail>
     </div>
