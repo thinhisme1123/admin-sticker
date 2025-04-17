@@ -17,6 +17,7 @@
     <div class="content-left col-xl-5 col-lg-5 col-md-5 col-sm-6 col-12">
       <app-sticker-table
         (stickerChoosen)="onStickerSelected($event)"
+        [newStickerId]="activeStickerId()!"
       >
 
       </app-sticker-table>

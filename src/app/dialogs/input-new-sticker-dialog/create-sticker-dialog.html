@@ -5,6 +5,11 @@
   <form [formGroup]="form" (ngSubmit)="submitForm()">
   
     <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input class="create-sticker-fields" matInput formControlName="name">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Description</mat-label>
       <input class="create-sticker-fields" matInput formControlName="description">
     </mat-form-field>

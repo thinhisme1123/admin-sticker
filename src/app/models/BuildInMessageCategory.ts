@@ -4,6 +4,7 @@ export interface BuildInMessageCategory {
     id:string,
     name: string,
     description:string,
+    type : 0,
     //BuildInMessage
     builtInMessages:BuildInMessage[]
 }

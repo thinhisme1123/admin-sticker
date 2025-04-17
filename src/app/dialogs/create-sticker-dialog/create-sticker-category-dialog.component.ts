@@ -7,12 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { environment } from '../../environments/environment';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { StickersService } from '../../services/stickers.service';
 
 @Component({
   selector: 'app-create-sticker-dialog',
   standalone: true,
-  templateUrl: './create-sticker-dialog.component.html',
-  styleUrls: ['./create-sticker-dialog.component.scss'],
+  templateUrl: './create-sticker-category-dialog.component.html',
+  styleUrls: ['./create-sticker-category-dialog.component.scss'],
   imports: [
     ReactiveFormsModule,
     MatDialogModule,
@@ -22,16 +23,16 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule,
   ],
 })
-export class CreateStickerDialogComponent {
+export class CreateStickerCategoryDialogComponent {
   form: FormGroup;
   stickerCreated = output();
 
-
   constructor(
-    private fb: FormBuilder,
-    private http: HttpClient,
-    public dialogRef: MatDialogRef<CreateStickerDialogComponent>,
-    private snackBar: MatSnackBar
+    private readonly fb: FormBuilder,
+    private readonly http: HttpClient,
+    public dialogRef: MatDialogRef<CreateStickerCategoryDialogComponent>,
+    private readonly snackBar: MatSnackBar,
+    private readonly stickerService: StickersService
   ) {
     this.form = this.fb.group({
       name: [''],
@@ -41,35 +42,27 @@ export class CreateStickerDialogComponent {
   }
   submitForm() {
     if (this.form.valid) {
-      const headers = {
-        Authorization: environment.apiToken,
-      };
-
-      this.http
-        .post(`${environment.apiUrl}/BuiltInMessageCategory`, this.form.value, {
-          headers,
-        })
-        .subscribe({
-          next: (response) => {
-            const message = 'Sticker created successfully!';
+      // áp dụng toSignal vào đây và ko cần phải gọi subsribe
+      this.stickerService.createNewStickerCategory(this.form.value).subscribe({
+        next: (res : any) => {
+          const message = 'Sticker created successfully!';
             this.snackBar.open(message, 'OK', {
               duration: 3000,
               horizontalPosition: 'right',
               verticalPosition: 'top',
               panelClass: ['snackbar-success'],
             });
-            this.stickerCreated.emit();
+            this.stickerCreated.emit(res.id);
             this.dialogRef.close();
-          },
-          error: (err) => {
-            this.snackBar.open('Failed to create sticker ❌', 'Close', {
-              duration: 4000,
-              panelClass: ['snackbar-error'],
-            });
-            console.error(err);
-          },
-        });
+        },
+        error: (error) => {
+          this.snackBar.open('Failed to create sticker ❌', 'Close', {
+            duration: 4000,
+            panelClass: ['snackbar-error'],
+          });
+          console.error(error);
+        },
+      });
     }
-    
   }
 }

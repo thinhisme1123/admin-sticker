@@ -52,6 +52,15 @@ tr.active-row {
         color: white;
     }
 }
+// active new create
+tr.active-newcreaterow {
+    background-color: #333333 !important;
+    color: white;
+    
+    td {
+        color: white;
+    }
+}
 
 tr {
     transition: background-color 0.2s ease;
@@ -97,7 +106,8 @@ tr {
     }
 }
 
-.sticker-name {
+.sticker-name,
+.sticker-desc {
     cursor: pointer;
 
     &:hover {

@@ -3,6 +3,6 @@ export interface BuildInMessage {
     id:string,
     name: string,
     description:string,
-    builtInMessageCategoryName:string,
-    type : string
+    path:string,
+    defaultOnTopVie: true
 }

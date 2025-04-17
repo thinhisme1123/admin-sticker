@@ -1,52 +1,61 @@
-@if (categories().length > 0) {
-  <div class="table-container">
-    <table mat-table [dataSource]="categories()" class="mat-elevation-z2">
-  
-      <ng-container matColumnDef="index">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
-      </ng-container>
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td class="sticker-name" (click)="onStickerClick(element)" mat-cell *matCellDef="let element">
-          {{ element.name }}</td>
-      </ng-container>
-  
-      <!-- Description Column -->
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Description</th>
-        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-      </ng-container>
-  
-  
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let element">
-          <div class="sticker-table-icon-container">
-            <button class="sticker-table-icon-btn" mat-icon-button color="primary" (click)="editSticker(element)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button class="sticker-table-icon-btn" mat-icon-button color="warn" (click)="deleteSticker(element)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </td>
-      </ng-container>
-  
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.active-row]="row.id === selectedStickerId"></tr>
-  
-    </table>
+@if (isLoading) {
+<div class="no-data-container">
+  <div class="no-data-box">
+    <img width="100" height="100" src="assets/loading.gif" alt="">
+    <h3>Sticker is loading...</h3>
+    <p>Looks like there’s nothing here yet.</p>
   </div>
+</div>
+}
+@else if (categories() && categories().length > 0) {
+<div class="table-container">
+  <table mat-table [dataSource]="categories()" class="mat-elevation-z2">
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td class="sticker-name" (click)="onStickerClick(element)" mat-cell *matCellDef="let element">
+        {{ element.name }}</td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td class="sticker-desc" mat-cell (click)="onStickerClick(element)" *matCellDef="let element">
+        {{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="sticker-table-icon-container">
+          <button class="sticker-table-icon-btn" mat-icon-button color="primary" (click)="editSticker(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="sticker-table-icon-btn" mat-icon-button color="warn" (click)="deleteSticker(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.active-row]="row.id === selectedStickerId"
+      [class.active-newcreaterow]="isNewStickerActive && row.id === newStickerId()"></tr>
+  </table>
+</div>
 }
 @else {
-  <div class="no-data-container">
-    <div class="no-data-box">
-      <img width="100" height="100" src="assets/loading.gif" alt="">
-      <h3>Sticker is loading...</h3>
-      <p>Looks like there’s nothing here yet.</p>
-    </div>
+<div class="no-data-container">
+  <div class="no-data-box">
+    <h3>No Sticker Created</h3>
+    <p>Please create new sticker to see it.</p>
   </div>
+</div>
+
 }

@@ -32,16 +32,27 @@ export class StickersService {
         .subscribe({
           next: (data) => {
             this._categories.set(data);
+            console.log(data);
+            
             resolve(data);
           },
           error: (err) => {
             console.error('Error fetching categories ❌', err);
+            
             reject(err);
           },
         });
     });
   }
-  // [DELETE] : delete sticker by id
+  // [POST] : create new sticker category
+  createNewStickerCategory(data  : BuildInMessageCategory) {
+    const headers = {
+      Authorization: this.token,
+    };
+    return this.http.post(`${this.baseUrl}/BuiltInMessageCategory`, data, { headers });
+  }
+
+  // [DELETE] : delete sticker category by id
   //waiting
   deleteSticker(id: string) {
     const headers = {
@@ -66,7 +77,7 @@ export class StickersService {
       }
     );
   }
-  // [PUT] : update sticker
+  // [PUT] : update sticker category 
   updateSticker(data: any) {
     const headers = {
       Authorization: this.token,
@@ -79,13 +90,13 @@ export class StickersService {
       }
     );
   }
-  // [POST] : upload sticker
-  uploadStickerFile(file: File, uploadType: number = 1): Observable<string> {
+  // [POST] : upload sticker file to firebase ( png, jpg, gif)
+  uploadStickerFile(file: File): Observable<string> {
     const formData = new FormData();
     formData.append('File', file);
 
     const headers = new HttpHeaders({
-      Authorization: environment.apiToken, 
+      Authorization: this.token, 
     });
 
     return this.http
@@ -94,12 +105,24 @@ export class StickersService {
       })
       .pipe(map((res) => res?.path || res?.filePath || ''));
   }
-  // [POST] : create new buildInMessage
-  createNewBuildInMessage(data : object) {
+  // [POST] : create new buildInMessage of buildmessagecategory
+  // tách ra 1 file service mới của category và sticker
+  createNewBuildInMessage(data : object): Observable<BuildInMessage>{
     const headers = new HttpHeaders({
-      Authorization: environment.apiToken, 
+      Authorization: this.token, 
     });
 
-    return this.http.post(`${environment.apiUrl}/BuiltInMessage/create-builtin-message`, data, {headers})
+    return this.http.post<BuildInMessage>(`${environment.apiUrl}/BuiltInMessage`, data, {headers})
+  }
+  // [DELETE] : delete  buildInMessage (sticker)
+  deleteBuildInMessage(id: string) {
+    const headers = {
+      Authorization: this.token,
+    };
+    console.log(id);
+    return this.http.delete(
+      `${this.baseUrl}/BuiltInMessage?Id=${id}`,
+      { headers }
+    );
   }
 } 

@@ -11,8 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-input-new-sticker-dialog',
   standalone: true,
-  templateUrl: './input-new-sticker-dialog.component.html',
-  styleUrl: './input-new-sticker-dialog.component.scss',
+  templateUrl: './create-sticker-dialog.html',
+  styleUrl: './create-sticker-dialog.scss',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -22,7 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatInputModule
   ],
 })
-export class InputNewStickerDialogComponent {
+export class CreateStickerDialogComponent {
   form: FormGroup;
   file: File | null = null;
   filePreviewUrl: string | null = null;
@@ -33,11 +33,12 @@ export class InputNewStickerDialogComponent {
     private fb: FormBuilder,
     private stickerSevice : StickersService,
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<InputNewStickerDialogComponent>
+    public dialogRef: MatDialogRef<CreateStickerDialogComponent>
   ) {
     this.form = this.fb.group({
       name: [''],
       description: [''],
+      path: [''],
       file: [null, Validators.required],
     });
   }
@@ -64,7 +65,8 @@ export class InputNewStickerDialogComponent {
     this.stickerSevice.uploadStickerFile(this.file).subscribe({
       next: (filePath) => {
         const payload = {
-          name: filePath,
+          name: this.form.get('name')?.value,
+          path: filePath,
           description: this.form.get('description')?.value,
           file: this.file
         };
