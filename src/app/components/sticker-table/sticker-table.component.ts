@@ -6,7 +6,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from '../../dialogs/comfirm-diaglog/confirm-diaglog.component';
-
+import { BuildInMessageCategory } from '../../models/BuildInMessageCategory';
 
 @Component({
   selector: 'app-sticker-table',
@@ -20,7 +20,6 @@ export class StickerTableComponent implements OnInit {
     'index',
     'name',
     'description',
-    'isReaction',
     'actions',
   ];
 
@@ -30,8 +29,9 @@ export class StickerTableComponent implements OnInit {
     private readonly snackBar: MatSnackBar
   ) {}
 
-  categories = signal<any[]>([]);
-  stickerSelected = output<string>()
+  categories = signal<BuildInMessageCategory[]>([]);
+  stickerChoosen = output<BuildInMessageCategory>()
+  selectedStickerId: string | null = null;
 
   ngOnInit() {
     this.loadStickers();
@@ -53,8 +53,8 @@ export class StickerTableComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: 'Delete Sticker',
-        message: `Are you sure you want to delete "${sticker.name}"?`,
+        title: 'Xoá Sticker',
+        message: `Bạn có chắc muốn xoá sticker "${sticker.name} không"?`,
       },
     });
   
@@ -83,7 +83,8 @@ export class StickerTableComponent implements OnInit {
     });
   }
   
-  onStickerClick(stickerID: string) {
-    this.stickerSelected.emit(stickerID)
+  onStickerClick(sticker: BuildInMessageCategory) {
+    this.selectedStickerId = sticker.id
+    this.stickerChoosen.emit(sticker)
   }
 }

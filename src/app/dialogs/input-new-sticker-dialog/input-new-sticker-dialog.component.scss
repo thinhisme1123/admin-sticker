@@ -1,0 +1,96 @@
+:host {
+    display: block;
+    padding: 24px;
+    box-sizing: border-box;
+    border-radius: 0px;
+    overflow: hidden;
+    background-color: #292929;
+}
+.input-sticker-header {
+    border-bottom: 1px solid #434343;
+    height: 44px;
+    margin-bottom: 15px;
+    h5 {
+        color: white;
+    }
+}
+
+mat-form-field {
+    border-radius: 4px;
+    width: 100%;
+}
+
+.sticker-upload-input mat-label{
+    color: white;
+}
+.sticker-upload-input {
+    input { 
+        display: none;
+    }
+}
+.sticker-upload-add-icon {
+    width: 100%;
+    background-color: #00d26a;
+    display: flex;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+    &:hover {
+        opacity: .9;
+    }
+}
+.sticker-upload-add-icon i{
+    margin: auto;
+    color: white;
+}
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+    margin-top: 20px;
+}
+button[mat-button] {
+    min-width: 100px;
+    padding: 5px 40px;
+    border-radius: 4px;
+    color: white;
+}
+#createSitckerSubmitBtn {
+    background-color: #3595de;
+}
+#cancelCreateStickerBtn {
+    border: 1px solid white;
+    
+    &:hover {
+        background-color: #7b8190;
+    }
+}
+
+// file pre-view
+.file-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.file-preview mat-label{
+    color: white;
+}
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    font-size: 13px;
+
+    button {
+        background: none;
+        border: none;
+        color: red;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}

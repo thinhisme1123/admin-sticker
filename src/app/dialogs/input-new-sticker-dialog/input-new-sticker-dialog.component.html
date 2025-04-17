@@ -1,0 +1,33 @@
+<div class="input-new-sticker-container">
+  <div class="input-sticker-header">
+    <h5 mat-dialog-title>Thêm Sticker Mới</h5>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+  
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <input class="create-sticker-fields" matInput formControlName="description">
+    </mat-form-field>
+
+    <div class="full-width sticker-upload-input">
+      <label for="fileStickers" class="sticker-upload-add-icon">
+        <i class="material-icons">add_circle</i>
+      </label>
+      <input id="fileStickers" (change)="onFileSelected($event)" type="file" accept=".png, .jpg, .jpeg, .gif"
+        class="create-sticker-fields" formControlName="file">
+    </div>
+    @if (file) {
+      <div class="file-preview-single">
+        <mat-label>File Selected</mat-label>
+        <div class="file-item">
+          <span>{{ file.name }}</span>
+          <button (click)="removeFile()">❌</button>
+        </div>
+      </div>
+    }
+    <div class="actions">
+      <button id="cancelCreateStickerBtn" mat-button type="button" (click)="dialogRef.close()">Cancel</button>
+      <button id="createSitckerSubmitBtn" mat-button type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+  </form>
+</div>

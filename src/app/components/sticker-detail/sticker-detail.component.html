@@ -2,18 +2,35 @@
 <div class="sticker-detail-container">
   <div class="sticker-list-table">
     <div class="sticker-detail-name">
-      <h5>{{stickerDetail().name}}</h5>
+      <h5>{{stickerDetail()?.name}} - <span>{{stickerDetail()?.description}}</span></h5>
+      <button class="adding-sticker-btn" (click)="openAddStickerDialog()">
+        <i class="material-icons">add_circle</i>
+        <span>Thêm Sticker</span>
+      </button>
     </div>
     <div class="scrollable-sticker-list">
       <div class="container-fluid mt-3">
         <div class="row g-3">
-          @for (sticker of secondStickersList; track sticker.id) {
-          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-            <div class="sticker-list-item">
-              <img [src]="sticker.imageUrl" alt="{{ sticker.name }}" class="img-fluid" />
+          @if (stickerItems().length > 0) {
+            @for (stickerItem of stickerItems(); track stickerItem.id) {
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="sticker-list-item" (click)="onStickerClicked(stickerItem.id)">
+                  <img [src]="stickerItem.name" alt="{{stickerItem.name}}" class="img-fluid" />
+                  <i (click)="deleteSticker(stickerItem.id); $event.stopPropagation()" class="material-icons">close</i>
+                </div>
+              </div>
+              }
+          } 
+          @else { 
+            <div class="no-sticker-box">
+              <div class="no-sticker-box-container">
+                <mat-icon class="no-sticker-icon">folder_open</mat-icon>
+                <h4>No Stickers Available</h4>
+                <p>Looks like this category doesn’t have any stickers yet.</p>
+              </div>
             </div>
-          </div>
           }
+          
         </div>
       </div>
     </div>

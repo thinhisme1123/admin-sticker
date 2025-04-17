@@ -16,14 +16,14 @@
   <div class="main-content-row">
     <div class="content-left col-xl-5 col-lg-5 col-md-5 col-sm-6 col-12">
       <app-sticker-table
-        (stickerSelected)="onStickerSelected($event)"
+        (stickerChoosen)="onStickerSelected($event)"
       >
 
       </app-sticker-table>
     </div>
     <div class="content-right col-xl-7 col-lg-7 col-md-7 col-sm-6 col-12">
       <app-sticker-detail
-        [stickerId]="selectedStickerid()"
+        [stickerDetail]="selectedSticker()!"
       >
       </app-sticker-detail>
     </div>

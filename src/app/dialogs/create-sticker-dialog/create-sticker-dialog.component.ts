@@ -26,7 +26,6 @@ export class CreateStickerDialogComponent {
   form: FormGroup;
   stickerCreated = output();
 
-  files: File[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -71,16 +70,6 @@ export class CreateStickerDialogComponent {
           },
         });
     }
-  }
-
-  onFilesSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input?.files) {
-      this.files.push(...Array.from(input.files));
-    }
-  }
-
-  removeFile(index: number) {
-    this.files.splice(index, 1);
+    
   }
 }

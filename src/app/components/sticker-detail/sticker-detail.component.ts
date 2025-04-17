@@ -1,12 +1,24 @@
+import { BuildInMessageCategory } from './../../models/BuildInMessageCategory';
 import { MatIconModule } from '@angular/material/icon';
 import { StickersService } from './../../services/stickers.service';
 import {
+  AfterViewChecked,
+  AfterViewInit,
   Component,
+  effect,
   input,
   OnChanges,
+  OnInit,
   signal,
   SimpleChanges,
+  EnvironmentInjector,
+  inject,
+  runInInjectionContext
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { InputNewStickerDialogComponent } from '../../dialogs/input-new-sticker-dialog/input-new-sticker-dialog.component';
+import { BuildInMessage } from '../../models/BuildInMessage';
+
 
 @Component({
   selector: 'app-sticker-detail',
@@ -14,38 +26,58 @@ import {
   templateUrl: './sticker-detail.component.html',
   styleUrl: './sticker-detail.component.scss',
 })
-export class StickerDetailComponent implements OnChanges {
-  stickerId = input<string>('');
-  stickerDetail = signal<any>(null);
-  constructor(private readonly stickerService: StickersService) {}
+export class StickerDetailComponent implements OnInit{
 
-  // fake sticker to test
-  firstStickersList = Array.from({ length: 40 }).map((_, i) => ({
-    id: i,
-    name: `Sticker ${i + 1}`,
-    imageUrl: 'assets/library.png',
-  }));
+  stickerDetail = input<BuildInMessageCategory>();
+  stickerItems = signal<BuildInMessage[]>([])
 
-  secondStickersList = Array.from({ length: 23 }).map((_, i) => ({
-    id: i,
-    name: `Sticker ${i + 1}`,
-    imageUrl:
-      'https://firebasestorage.googleapis.com/v0/b/x-extension-framework.firebasestorage.app/o/chat-media%2F2025-15-04%2F058128b2-e317-4500-990e-1568b67a9f4b?alt=media',
-  }));
+  constructor(
+    private readonly stickerService: StickersService,
+    private readonly dialog: MatDialog,
+    private readonly injector: EnvironmentInjector
+  ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['stickerId'] && this.stickerId()) {
-      this.loadStickerDetail(this.stickerId());
-    }
-  }
-  loadStickerDetail(stickerId: string) {
-    console.log('loadStickerDetail', stickerId);
-    this.stickerService.getStickerDetail(stickerId).subscribe({
-      next: (stickerDetail) => this.stickerDetail.set(stickerDetail),
-      error: (err) => {
-        console.error('Failed to fetch sticker detail:', err);
-        this.stickerDetail.set(null);
-      },
+  ngOnInit(): void {
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const buildMessages = this.stickerDetail()?.builtInMessages || []
+        this.stickerItems.set(buildMessages)
+      });
     });
+  }
+
+  openAddStickerDialog(): void {
+    const dialogRef = this.dialog.open(InputNewStickerDialogComponent, {
+      width: '600px', 
+      disableClose: true,
+      autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      
+      if (result) {
+        const stickerPayload = {
+          builtInMessageCategoryId: this.stickerDetail()?.id,
+          name: result.name,
+          description: result.description
+        };
+        console.log('🆕 Sticker files received:', stickerPayload);
+        this.stickerService.createNewBuildInMessage(stickerPayload).subscribe((res) => {
+          console.log('✅ Stickers created:', res);
+        }, (error) => {
+          console.error('❌ Error creating stickers:', error);
+        })
+
+      }
+    });
+  }
+
+  deleteSticker(data:any) {
+    console.log(data);
+    
+  }
+  onStickerClicked(data:any) {
+    console.log(data);
+    
   }
 }

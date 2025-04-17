@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { StickerDetailComponent } from './components/sticker-detail/sticker-detail.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateStickerDialogComponent } from './dialogs/create-sticker-dialog/create-sticker-dialog.component';
+import { BuildInMessageCategory } from './models/BuildInMessageCategory';
 @Component({
   selector: 'app-root',
   imports: [
@@ -21,7 +22,7 @@ import { CreateStickerDialogComponent } from './dialogs/create-sticker-dialog/cr
 export class AppComponent {
   constructor(private readonly dialog: MatDialog) {}
 
-  selectedStickerid = signal<string>('')
+  selectedSticker = signal<BuildInMessageCategory | null>(null)
 
   @ViewChild(StickerTableComponent) stickerTable! : StickerTableComponent
 
@@ -35,10 +36,9 @@ export class AppComponent {
       this.stickerTable.loadStickers(); 
     });
   }
-  onStickerSelected(stickerId: string) {
-    this.selectedStickerid.set(stickerId)
-  
+  onStickerSelected(sticker: BuildInMessageCategory) {
+    this.selectedSticker.set(sticker)
   }
   
-  title = 'sticker-admin';
+  title = 'Trao đổi';
 }
