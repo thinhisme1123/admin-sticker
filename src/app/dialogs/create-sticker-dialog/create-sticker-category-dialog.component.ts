@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { environment } from '../../environments/environment';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { StickersService } from '../../services/stickers.service';
+import { StickerCategoryService } from '../../services/sticker-category.service';
 
 @Component({
   selector: 'app-create-sticker-dialog',
@@ -32,7 +33,7 @@ export class CreateStickerCategoryDialogComponent {
     private readonly http: HttpClient,
     public dialogRef: MatDialogRef<CreateStickerCategoryDialogComponent>,
     private readonly snackBar: MatSnackBar,
-    private readonly stickerService: StickersService
+    private readonly stickerCategoryService : StickerCategoryService
   ) {
     this.form = this.fb.group({
       name: [''],
@@ -43,7 +44,7 @@ export class CreateStickerCategoryDialogComponent {
   submitForm() {
     if (this.form.valid) {
       // áp dụng toSignal vào đây và ko cần phải gọi subsribe
-      this.stickerService.createNewStickerCategory(this.form.value).subscribe({
+      this.stickerCategoryService.createNewStickerCategory(this.form.value).subscribe({
         next: (res : any) => {
           const message = 'Sticker created successfully!';
             this.snackBar.open(message, 'OK', {

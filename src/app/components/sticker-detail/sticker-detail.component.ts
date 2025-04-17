@@ -19,6 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateStickerDialogComponent } from '../../dialogs/input-new-sticker-dialog/create-sticker-dialog';
 import { BuildInMessage } from '../../models/BuildInMessage';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StickerCategoryService } from '../../services/sticker-category.service';
 
 @Component({
   selector: 'app-sticker-detail',
@@ -31,6 +32,7 @@ export class StickerDetailComponent implements OnInit {
   stickerItems = signal<BuildInMessage[]>([]);
 
   constructor(
+    private readonly stickerCategoryService : StickerCategoryService,
     private readonly stickerService: StickersService,
     private readonly dialog: MatDialog,
     private readonly snackBar: MatSnackBar,
@@ -51,8 +53,8 @@ export class StickerDetailComponent implements OnInit {
   }
   refreshStickerItems() {
     // Get fresh data from the service for the current sticker category
-    this.stickerService
-      .getStickerDetail(this.stickerDetail()?.id as string)
+    this.stickerCategoryService
+      .getStickerCategoryDetail(this.stickerDetail()?.id as string)
       .subscribe({
         next: (updatedCategory) => {
           this.stickerItems.set(updatedCategory.builtInMessages || []);

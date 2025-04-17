@@ -1,7 +1,6 @@
 import { Component, signal, OnInit, output, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { StickersService } from '../../services/stickers.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,6 +8,7 @@ import { ConfirmDialogComponent } from '../../dialogs/comfirm-diaglog/confirm-di
 import { BuildInMessageCategory } from '../../models/BuildInMessageCategory';
 import { Subscription, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { StickerCategoryService } from '../../services/sticker-category.service';
 
 @Component({
   selector: 'app-sticker-table',
@@ -21,7 +21,7 @@ export class StickerTableComponent implements OnInit {
   displayedColumns: string[] = ['index', 'name', 'description', 'actions'];
 
   constructor(
-    private readonly stickersService: StickersService,
+    private readonly stickerCategoryService: StickerCategoryService,
     private readonly dialog: MatDialog,
     private readonly snackBar: MatSnackBar
   ) {}
@@ -33,19 +33,7 @@ export class StickerTableComponent implements OnInit {
   isNewStickerActive = true;
   newStickerId = input<string>();
   // thay chỗ này thành model signal
-  // dugnf 1 biến
-
-  // ngOnInit() {
-  //   this.loadStickers();
-  // }
-
-  // loadStickers() {
-  //   this.stickersService.fetchCategories();
-  //   setTimeout(() => {
-  //     this.categories.set(this.stickersService.categories());
-  //     console.log('Stickers loaded', this.categories());
-  //   }, 1000);
-  // }
+  // dùng 1 biến
 
   isLoading = true;
 
@@ -58,14 +46,14 @@ export class StickerTableComponent implements OnInit {
   loadStickers() {
     this.isLoading = true;
 
-    this.stickersService.fetchCategories();
+    this.stickerCategoryService.fetchCategories();
 
     
     const subscription = interval(1000)
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.categories.set(this.stickersService.categories());
+          this.categories.set(this.stickerCategoryService.categories());
           this.isLoading = false;
           console.log('Stickers loaded', this.categories());
         },
@@ -101,7 +89,7 @@ export class StickerTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        this.stickersService.deleteSticker(sticker.id).subscribe({
+        this.stickerCategoryService.deleteStickerCategory(sticker.id).subscribe({
           next: () => {
             this.snackBar.open(
               'Sticker Category deleted successfully ✅',
