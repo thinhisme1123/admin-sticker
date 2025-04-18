@@ -2,8 +2,6 @@ import { Injectable, signal } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BuildInMessageCategory } from '../models/BuildInMessageCategory';
-import { Observable, map } from 'rxjs';
-import { BuildInMessage } from '../models/BuildInMessage';
 
 @Injectable({
   providedIn: 'root',
