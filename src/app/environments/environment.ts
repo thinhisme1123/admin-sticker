@@ -8,9 +8,9 @@ export const environment = {
 // export const environment = {
 //   production: false,
 //   apiUrl:
-//     'https://8d31-2402-800-63ba-c309-300a-242c-a61b-40e2.ngrok-free.app/api/v1',
+//     'http://192.168.1.29:40081/api/v1',
 //   apiToken:
-//     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjU0NzAwMjk1LTlhZWUtNDczMC04YzFkLWFlYzdiMzAxZDY1ZCIsIm5iZiI6MTc0NDg1ODQzMiwiZXhwIjoxNzQ1NDYzMjMyLCJpYXQiOjE3NDQ4NTg0MzIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQwNDQzIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDAwMiJ9.vk1Yhe-1OiJuEhuIzYCAt4UTqjKe8aY2HeBiP_yBvzA',
+//     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImUyZGYwZmMwLWFlN2ItNGZkMS1hMGM5LWYyNDUzNTEyMDU0MiIsIm5iZiI6MTc0NDk0ODA1OCwiZXhwIjoxNzQ1NTUyODU4LCJpYXQiOjE3NDQ5NDgwNTgsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQwNDQzIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDAwMiJ9.38cvbS72vc7hH5ow7II6PZv3C73wLtr5zKKmHA4Lcdo',
 //   headers: {
 //     'ngrok-skip-browser-warning': '69420',
 //   },

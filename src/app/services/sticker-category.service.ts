@@ -79,11 +79,13 @@ export class StickerCategoryService {
     );
   }
   // [PUT] : update sticker category 
-  updateSticker(data: any) {
+  updateStickerCategory(data: BuildInMessageCategory) {
     const headers = {
       Authorization: this.token,
     };
-    return this.http.put<any>(
+    console.log(data);
+    
+    return this.http.put(
       `${this.baseUrl}/BuiltInMessageCategory`,
       data,
       {

@@ -24,8 +24,8 @@
         <label for="fileStickers" class="sticker-upload-add-icon">
           <i class="material-icons">add_circle</i>
         </label>
-        <input id="fileStickers" (change)="onFileSelected($event)" type="file" accept=".png, .jpg, .jpeg, .gif"
-          class="create-sticker-fields" formControlName="file">
+        <input #fileInput id="fileStickers" (change)="onFileSelected($event)" type="file" accept=".png, .jpg, .jpeg, .gif"
+          class="create-sticker-fields">
       </div>
     }
     @if (file) {

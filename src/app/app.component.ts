@@ -23,7 +23,7 @@ export class AppComponent {
   constructor(private readonly dialog: MatDialog) {}
 
   selectedSticker = signal<BuildInMessageCategory | null>(null)
-  activeStickerId =signal<string | null>(null)
+  activeStickerId = signal<string | null>(null)
  
   @ViewChild(StickerTableComponent) stickerTable! : StickerTableComponent
 
@@ -32,9 +32,10 @@ export class AppComponent {
       width: '400px'
     });
     // re-render view to update new data 
-    dialogRef.componentInstance.stickerCreated.subscribe((newStickerId: any) => {
-      console.log('New sticker created with ID:', newStickerId);
-      this.activeStickerId.set(newStickerId)
+    dialogRef.componentInstance.stickerCategoryCreated.subscribe((newSticker: BuildInMessageCategory) => {
+      console.log('New sticker created with ID:', newSticker);
+      this.activeStickerId.set(newSticker.id)
+      this.selectedSticker.set(newSticker)
       this.stickerTable.loadStickers(); 
     });
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -28,18 +28,18 @@ export class CreateStickerDialogComponent {
   filePreviewUrl: string | null = null;
   isUploading: boolean = false;
 
+  @ViewChild('fileInput') fileInputRef!: ElementRef<HTMLInputElement>; 
 
   constructor(
-    private fb: FormBuilder,
-    private stickerSevice : StickersService,
-    private snackBar: MatSnackBar,
+    private readonly fb: FormBuilder,
+    private readonly stickerSevice : StickersService,
+    private readonly snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<CreateStickerDialogComponent>
   ) {
     this.form = this.fb.group({
       name: [''],
       description: [''],
-      path: [''],
-      file: [null, Validators.required],
+      path: ['']
     });
   }
 
@@ -57,6 +57,11 @@ export class CreateStickerDialogComponent {
     this.file = null;
     this.filePreviewUrl = null;
     this.form.get('file')?.reset();
+
+    // ✅ Safely reset native file input
+    if (this.fileInputRef) {
+      this.fileInputRef.nativeElement.value = '';
+    }
   }
 
   submitForm() {

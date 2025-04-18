@@ -7,6 +7,15 @@
   </div>
 </div>
 }
+@else if (isServerDie) {
+<div class="no-data-container">
+  <div class="no-data-box">
+    <i class="material-icons no-data-icon">warning_amber</i>
+    <h3>Server not response</h3>
+    <p>Seem that something wrong with server, please comback later!</p>
+  </div>
+</div>
+}
 @else if (categories() && categories().length > 0) {
 <div class="table-container">
   <table mat-table [dataSource]="categories()" class="mat-elevation-z2">
@@ -45,8 +54,7 @@
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.active-row]="row.id === selectedStickerId"
-      [class.active-newcreaterow]="isNewStickerActive && row.id === newStickerId()"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.active-row]="row.id === activeRowId()"></tr>
   </table>
 </div>
 }

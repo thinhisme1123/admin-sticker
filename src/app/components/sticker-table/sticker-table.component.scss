@@ -1,6 +1,6 @@
 .table-container {
     background-color: #424242;
-    max-height: 100vh;
+    max-height: 84vh;
     min-height: 84vh;
     margin: 15px;
     border-radius: 8px;
@@ -52,15 +52,7 @@ tr.active-row {
         color: white;
     }
 }
-// active new create
-tr.active-newcreaterow {
-    background-color: #333333 !important;
-    color: white;
-    
-    td {
-        color: white;
-    }
-}
+
 
 tr {
     transition: background-color 0.2s ease;
@@ -86,6 +78,7 @@ tr {
     text-align: center;
     color: #ccc;
 }
+
 
 .no-data-icon {
     height: 50px;

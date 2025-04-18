@@ -1,0 +1,21 @@
+<div class="edit-sticker-dialog-container">
+  <div class="edit-sticker-header">
+    <h5 mat-dialog-title>Sửa Sticker Category</h5>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+
+    <div class="edit-actions">
+      <button id="cancelEdittickerBtn" mat-button type="button" (click)="cancel()">Cancel</button>
+      <button id="editSitckerSubmitBtn" mat-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+    </div>
+  </form>
+</div>

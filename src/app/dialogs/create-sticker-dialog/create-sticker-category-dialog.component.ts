@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { StickersService } from '../../services/stickers.service';
 import { StickerCategoryService } from '../../services/sticker-category.service';
+import { BuildInMessageCategory } from '../../models/BuildInMessageCategory';
 
 @Component({
   selector: 'app-create-sticker-dialog',
@@ -26,7 +27,7 @@ import { StickerCategoryService } from '../../services/sticker-category.service'
 })
 export class CreateStickerCategoryDialogComponent {
   form: FormGroup;
-  stickerCreated = output();
+  stickerCategoryCreated = output<BuildInMessageCategory>();
 
   constructor(
     private readonly fb: FormBuilder,
@@ -38,7 +39,6 @@ export class CreateStickerCategoryDialogComponent {
     this.form = this.fb.group({
       name: [''],
       description: [''],
-      isReaction: [true],
     });
   }
   submitForm() {
@@ -53,7 +53,7 @@ export class CreateStickerCategoryDialogComponent {
               verticalPosition: 'top',
               panelClass: ['snackbar-success'],
             });
-            this.stickerCreated.emit(res.id);
+            this.stickerCategoryCreated.emit(res);
             this.dialogRef.close();
         },
         error: (error) => {
